@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-
 export default function createProdi() {
-    //Inisialisasi state u/ menyimpan nama Prodi
+  
+  const token = localStorage.getItem("authToken");
+
+  //Inisialisasi state u/ menyimpan nama Prodi
   const [namaProdi, setNamaProdi] = useState('');
   //Inisialiasasi state u/ menyimpan id fakultas yang dipilih
   const [fakultasId, setFakultasId] = useState('');
@@ -44,6 +46,12 @@ export default function createProdi() {
         "https://project-apiif-3-b.vercel.app/api/api/prodi",
         { nama: namaProdi,
             fakultas_id: fakultasId ,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json'
+          }
         }
       );
 
